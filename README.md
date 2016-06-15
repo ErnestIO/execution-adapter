@@ -18,7 +18,7 @@ make install
 
 ```
 make deps
-go test
+make test
 ```
 
 ## Contributing
