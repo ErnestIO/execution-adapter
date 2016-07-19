@@ -37,7 +37,7 @@ func getConnectorTypes(ctype string) []string {
 	return connectors[ctype]
 }
 
-func main() {
+func setup() {
 	nc = ecc.NewConfig(os.Getenv("NATS_URI")).Nats()
 
 	c := o.Config{
@@ -46,7 +46,11 @@ func main() {
 	}
 
 	log.Println("Set up executions")
-	o.StandardSubscription(&c, "execution.create", "execution_type")
+	t := Translator{}
+	o.TranslatedSubscription(&c, "execution.create", "_type", t)
+}
 
+func main() {
+	setup()
 	runtime.Goexit()
 }
