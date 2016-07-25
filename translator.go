@@ -94,7 +94,7 @@ func (t Translator) BuilderToConnector(j []byte) []byte {
 	json.Unmarshal(j, &input)
 
 	switch input.Type {
-	case "salt", "fake":
+	case "salt", "fake", "vcloud-fake":
 		output = t.builderToVCloudConnector(input)
 	}
 
@@ -107,7 +107,11 @@ func (t Translator) builderToVCloudConnector(input builderEvent) []byte {
 	output.Uuid = input.Uuid
 	output.BatchID = input.BatchID
 	output.Service = input.Service
-	output.Type = input.Type
+	if input.DatacenterType == "vcloud-fake" || input.DatacenterType == "aws-fake" || input.DatacenterType == "fake" {
+		output.Type = "fake"
+	} else {
+		output.Type = input.Type
+	}
 
 	output.Name = input.Name
 	output.ServiceName = input.ServiceName
@@ -144,7 +148,7 @@ func (t Translator) ConnectorToBuilder(j []byte) []byte {
 	dec.Decode(&input)
 
 	switch input["_type"] {
-	case "salt", "fake":
+	case "salt", "fake", "vcloud-fake":
 		output = t.vcloudConnectorToBuilder(j)
 	}
 
