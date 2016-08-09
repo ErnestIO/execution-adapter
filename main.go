@@ -7,6 +7,7 @@ import (
 	"runtime"
 	"time"
 
+	ecc "github.com/ernestio/ernest-config-client"
 	"github.com/nats-io/nats"
 	o "github.com/r3labs/otomo"
 )
@@ -37,15 +38,7 @@ func getConnectorTypes(ctype string) []string {
 }
 
 func main() {
-	natsURI := os.Getenv("NATS_URI")
-	if natsURI == "" {
-		natsURI = nats.DefaultURL
-	}
-
-	nc, natsErr = nats.Connect(natsURI)
-	if natsErr != nil {
-		log.Fatal(natsErr)
-	}
+	nc = ecc.NewConfig(os.Getenv("NATS_URI")).Nats()
 
 	c := o.Config{
 		Client:     nc,
