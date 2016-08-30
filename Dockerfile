@@ -7,4 +7,4 @@ WORKDIR /go/src/github.com/ernestio/execution-adapter
 
 RUN make deps && go install
 
-ENTRYPOINT /go/bin/execution-adapter
+ENTRYPOINT ./entrypoint.sh
