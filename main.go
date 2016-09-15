@@ -45,9 +45,10 @@ func setup() {
 		ValidTypes: getConnectorTypes("executions"),
 	}
 
-	log.Println("Set up executions")
+	log.Println("Set up bootstraps and executions")
 	t := Translator{}
 	o.TranslatedSubscription(&c, "execution.create", "_type", t)
+	o.TranslatedSubscription(&c, "bootstrap.create", "_type", t)
 }
 
 func main() {
