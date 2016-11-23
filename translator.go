@@ -50,7 +50,7 @@ type builderEvent struct {
 	VCloudURL             string   `json:"vcloud_url"`
 	Status                string   `json:"status"`
 	ErrorCode             string   `json:"error_code"`
-	ErrorMessage          string   `json:"error_message"`
+	ErrorMessage          string   `json:"error"`
 }
 
 type vcloudEvent struct {
@@ -83,7 +83,7 @@ type vcloudEvent struct {
 	VCloudURL                 string   `json:"vcloud_url"`
 	Status                    string   `json:"status"`
 	ErrorCode                 string   `json:"error_code"`
-	ErrorMessage              string   `json:"error_message"`
+	ErrorMessage              string   `json:"error"`
 }
 
 type Translator struct{}
